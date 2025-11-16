@@ -16,7 +16,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr class="align-bottom" *ngFor="let student of students">
+        <tr class="align-bottom" *ngFor="let student of pagedStudents">
           <td scope="row">{{ student.rollNo }}</td>
           <td scope="row">{{ student.name }}</td>
           <td scope="row">{{ student.gender }}</td>
@@ -31,6 +31,23 @@
         </tr>
       </tbody>
     </table>
+    <nav *ngIf="students.length > pageSize" aria-label="Student table pagination" class="pagination-bottom">
+      <ul class="pagination justify-content-center">
+        <li class="page-item" [class.disabled]="page === 1">
+          <button class="page-link" (click)="prevPage()" [disabled]="page === 1" title="Previous">
+            <i class="bi bi-chevron-left"></i>
+          </button>
+        </li>
+        <li class="page-item" *ngFor="let p of [].constructor(totalPages); let i = index" [class.active]="page === i+1">
+          <button class="page-link" (click)="goToPage(i+1)">{{ i+1 }}</button>
+        </li>
+        <li class="page-item" [class.disabled]="page === totalPages">
+          <button class="page-link" (click)="nextPage()" [disabled]="page === totalPages" title="Next">
+            <i class="bi bi-chevron-right"></i>
+          </button>
+        </li>
+      </ul>
+    </nav>
   </ng-container>
   <ng-template #noData>
     <div class="alert alert-warning text-center my-3">

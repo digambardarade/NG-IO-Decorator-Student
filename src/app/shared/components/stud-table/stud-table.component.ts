@@ -12,9 +12,22 @@ export class StudTableComponent implements OnInit {
   @Output() editStudent = new EventEmitter<Student>();
   @Output() removeStudent = new EventEmitter<number>();
 
+  // Pagination
+  page: number = 1;
+  pageSize: number = 9;
+
   constructor() {}
 
   ngOnInit(): void {}
+
+  get pagedStudents(): Student[] {
+    const start = (this.page - 1) * this.pageSize;
+    return this.students.slice(start, start + this.pageSize);
+  }
+
+  get totalPages(): number {
+    return Math.ceil(this.students.length / this.pageSize) || 1;
+  }
 
   onEditStudent(student: Student) {
     this.editStudent.emit(student);
@@ -33,5 +46,17 @@ export class StudTableComponent implements OnInit {
       age--;
     }
     return age;
+  }
+
+  prevPage() {
+    if (this.page > 1) this.page--;
+  }
+
+  nextPage() {
+    if (this.page < this.totalPages) this.page++;
+  }
+
+  goToPage(p: number) {
+    if (p >= 1 && p <= this.totalPages) this.page = p;
   }
 }
