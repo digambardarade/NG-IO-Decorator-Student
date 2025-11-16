@@ -1,0 +1,24 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 bg-primary text-white text-center my-2 py-2">
+      <strong>I/O Decorator Stud Example</strong>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4 ">
+      <app-stud-form
+        [student]="selectedStudent"
+        (addStudent)="onAddStudent($event)"
+        (updateStudent)="onUpdateStudent($event)"
+        (cancelEdit)="onCancelEdit()"
+      ></app-stud-form>
+    </div>
+    <div class="offset-md-1 col-md-7 ">
+      <app-stud-table
+        [students]="students"
+        (editStudent)="onEditStudent($event)"
+        (removeStudent)="onRemoveStudent($event)"
+      ></app-stud-table>
+    </div>
+  </div>
+</div>
