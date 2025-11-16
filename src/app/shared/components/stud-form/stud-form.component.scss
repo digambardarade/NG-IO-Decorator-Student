@@ -1,3 +1,23 @@
 .form-bg{
     background-color: rgb(248, 207, 158);
 }
+
+form {
+    background: transparent;
+}
+
+.col-form-label {
+    font-weight: 500;
+}
+
+.form-control, .form-select {
+    min-width: 180px;
+}
+
+.row {
+    margin-bottom: 0 !important;
+}
+
+.gap-2 {
+    gap: 0.5rem !important;
+}

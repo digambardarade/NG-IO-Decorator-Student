@@ -1,5 +1,6 @@
 <div class="row">
   <div class="col-md-12 text-white bg-success py-2 text-center">
+    <i class="bi bi-table me-2"></i>
     <strong>Student Table</strong>
   </div>
   <ng-container *ngIf="students && students.length > 0; else noData">
@@ -23,8 +24,8 @@
           <td scope="row">{{ student.department }}</td>
           <td>
             <div class="d-flex justify-content-md-evenly">
-              <button class="btn btn-sm btn-primary" (click)="onEditStudent(student)">Edit</button>
-              <button class="btn btn-sm btn-danger" (click)="onRemoveStudent(student.rollNo)">Delete</button>
+              <button class="btn btn-sm btn-primary" (click)="onEditStudent(student)" title="Edit"><i class="bi bi-pencil-square"></i></button>
+              <button class="btn btn-sm btn-danger" (click)="onRemoveStudent(student.rollNo)" title="Delete"><i class="bi bi-trash"></i></button>
             </div>
           </td>
         </tr>

@@ -8,6 +8,11 @@ import { Student } from '../../models/student.interface';
 })
 
 export class StudFormComponent implements OnInit, OnChanges, AfterViewInit {
+  nameError: string = '';
+  genderError: string = '';
+  departmentError: string = '';
+  maxDate: string = new Date().toISOString().split('T')[0];
+  dobError: string = '';
     @ViewChild('nameInput') nameInputRef!: ElementRef;
     ngAfterViewInit(): void {
       this.setFocusToName();
@@ -52,6 +57,35 @@ export class StudFormComponent implements OnInit, OnChanges, AfterViewInit {
   }
 
   onSubmit() {
+    this.nameError = '';
+    this.genderError = '';
+    this.departmentError = '';
+    this.dobError = '';
+
+    let valid = true;
+    if (!this.form.name.trim()) {
+      this.nameError = 'Name is required.';
+      valid = false;
+    }
+    if (!this.form.gender) {
+      this.genderError = 'Gender is required.';
+      valid = false;
+    }
+    if (!this.form.dob) {
+      this.dobError = 'DOB is required.';
+      valid = false;
+    } else if (new Date(this.form.dob) > new Date()) {
+      this.dobError = 'Future date is not allowed.';
+      valid = false;
+    }
+    if (!this.form.department) {
+      this.departmentError = 'Department is required.';
+      valid = false;
+    }
+    if (!valid) {
+      this.setFocusToName();
+      return;
+    }
     if (this.isEdit) {
       this.updateStudent.emit(this.form);
     } else {

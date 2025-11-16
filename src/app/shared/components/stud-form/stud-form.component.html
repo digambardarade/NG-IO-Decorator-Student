@@ -1,22 +1,28 @@
 <div class="row form-bg">
   <div class="col-md-12 text-white bg-success py-2 text-center">
+    <i class="bi bi-person-lines-fill me-2"></i>
     <strong>Student Form</strong>
   </div>
-  <div class="row my-2">
-    <div class="form-group">
-      <label for="inputName">Name :</label>
-      <input
-        #nameInput
-        type="text"
-        class="form-control"
-        id="inputName"
-        placeholder="Enter Name.."
-        [(ngModel)]="form.name"
-        name="name"
-      />
-
-      <div class="d-flex justify-content-between my-2">
-        <label for="">Gender :</label>
+  <form class="p-3 my-3">
+    <div class="mb-3 my-3 row align-items-center">
+      <label for="inputName" class="col-sm-4 col-form-label"><i class="bi bi-person me-1"></i>Name :</label>
+      <div class="col-sm-8">
+        <input
+          #nameInput
+          type="text"
+          class="form-control"
+          id="inputName"
+          placeholder="Enter Name.."
+          [(ngModel)]="form.name"
+          name="name"
+          required
+        />
+        <div *ngIf="nameError" class="text-danger small mt-1">{{ nameError }}</div>
+      </div>
+    </div>
+    <div class="mb-3 my-3 row align-items-center">
+      <label class="col-sm-4 col-form-label"><i class="bi bi-gender-ambiguous me-1"></i>Gender :</label>
+      <div class="col-sm-8 d-flex gap-3">
         <div class="form-check">
           <input
             class="form-check-input"
@@ -25,6 +31,7 @@
             id="flexRadioMale"
             [(ngModel)]="form.gender"
             value="Male"
+            required
           />
           <label class="form-check-label" for="flexRadioMale"> Male </label>
         </div>
@@ -36,17 +43,25 @@
             id="flexRadioFemale"
             [(ngModel)]="form.gender"
             value="Female"
+            required
           />
+            <div *ngIf="genderError" class="text-danger small mt-1">{{ genderError }}</div>
           <label class="form-check-label" for="flexRadioFemale"> Female </label>
         </div>
       </div>
-      <div class="d-flex justify-content-between my-2">
-        <label class="me-2" for="inputDOB">DOB:</label>
-        <input type="date" class="form-control" id="inputDOB" [(ngModel)]="form.dob" name="dob" />
+    </div>
+    <div class="mb-3 my-3 row align-items-center">
+      <label for="inputDOB" class="col-sm-4 col-form-label"><i class="bi bi-calendar-date me-1"></i>DOB:</label>
+      <div class="col-sm-8">
+        <input type="date" class="form-control" id="inputDOB" [(ngModel)]="form.dob" name="dob" [max]="maxDate" required />
+        <div *ngIf="dobError" class="text-danger small mt-1">{{ dobError }}</div>
       </div>
-      <div class=" d-flex justify-content-between my-2">
-        <label class="me-2" for="inputDOB">Department:</label>
-        <select class="form-select" [(ngModel)]="form.department" name="department" title="Department">
+    </div>
+    <div class="mb-3 my-3 row align-items-center">
+      <label for="inputDepartment" class="col-sm-4 col-form-label"><i class="bi bi-building me-1"></i>Department:</label>
+      <div class="col-sm-8">
+        <select class="form-select" id="inputDepartment" [(ngModel)]="form.department" name="department" title="Department" required>
+            <div *ngIf="departmentError" class="text-danger small mt-1">{{ departmentError }}</div>
           <option value="">Select Department</option>
           <option value="Computer Science">Computer Science</option>
           <option value="Mechanical">Mechanical</option>
@@ -54,13 +69,14 @@
           <option value="Civil">Civil</option>
           <option value="Electronics">Electronics</option>
         </select>
-        </div>
-        <div class="d-flex align-items-center justify-content-between">
-          <button class="button-sm bg-primary text-white border rounded-pill w-50 py-2 mb-2 me-2" (click)="onSubmit()" *ngIf="!isEdit">Add Student</button>
-          <button class="button-sm bg-warning border rounded-pill w-50 py-2 mb-2" (click)="onReset()" *ngIf="!isEdit">Reset</button>
-          <button class="button-sm bg-success border rounded-pill w-50 py-2 mb-2 me-2" (click)="onSubmit()" *ngIf="isEdit">Update Student</button>
-          <button class="button-sm bg-secondary border rounded-pill w-50 py-2" (click)="onCancel()" *ngIf="isEdit">Cancel</button>
-        </div>
       </div>
     </div>
-  </div>
+    <div class="row mb-2 my-3">
+      <div class="col-sm-12 d-flex align-items-center justify-content-between gap-2">
+        <button type="button" class="button-sm bg-primary text-white border rounded-pill w-50 py-2 mb-2 me-2" (click)="onSubmit()" *ngIf="!isEdit"><i class="bi bi-plus-circle me-1"></i>Add Student</button>
+        <button type="button" class="button-sm bg-warning border rounded-pill w-50 py-2 mb-2" (click)="onReset()" *ngIf="!isEdit"><i class="bi bi-arrow-clockwise me-1"></i>Reset</button>
+        <button type="button" class="button-sm bg-success border rounded-pill w-50 py-2 mb-2 me-2" (click)="onSubmit()" *ngIf="isEdit"><i class="bi bi-arrow-up-circle me-1"></i>Update Student</button>
+        <button type="button" class="button-sm bg-secondary border rounded-pill w-50 py-2" (click)="onCancel()" *ngIf="isEdit"><i class="bi bi-x-circle me-1"></i>Cancel</button>
+      </div>
+    </div>
+  </form>
