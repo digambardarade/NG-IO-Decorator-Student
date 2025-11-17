@@ -9,3 +9,10 @@
 	box-shadow: 0 -2px 8px rgba(0,0,0,0.05);
 	padding: 0.5rem 0;
 }
+
+// Add bottom padding to table container on mobile so last row is not hidden by fixed pagination
+@media (max-width: 768px) {
+  .table {
+    margin-bottom: 3.5rem; // Adjust to match or exceed pagination height
+  }
+}
